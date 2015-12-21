@@ -31,7 +31,7 @@
 		bh_j22_position_controller 
 		bh_j32_position_controller"/> 
   
-
+  <include file="$(find bhand_gazebo)/launch/bhand_controller_gazebo.launch"/>
   
 
   <!-- Stow the arm -->
