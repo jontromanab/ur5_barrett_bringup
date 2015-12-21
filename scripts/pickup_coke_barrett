@@ -1,0 +1,49 @@
+#!/usr/bin/env python
+import time
+import rospy
+import actionlib
+from control_msgs.msg import *
+from trajectory_msgs.msg import *
+
+
+
+JOINT_NAMES2 = ['bh_j32_joint','bh_j33_joint','bh_j11_joint','bh_j12_joint','bh_j13_joint','bh_j21_joint','bh_j22_joint','bh_j23_joint']
+P1 = [0,0,0,0,0,0,0,0]
+P2 = [-1.57,-1.57,0,-1.57,0,0,0,0]
+
+client = None
+
+def move():
+    
+
+    p = FollowJointTrajectoryGoal()
+    p.trajectory = JointTrajectory()
+    p.trajectory.joint_names = JOINT_NAMES2
+    p.trajectory.points = [
+        JointTrajectoryPoint(positions=P1, velocities=[0]*3, time_from_start=rospy.Duration(6.0)),
+        JointTrajectoryPoint(positions=P2, velocities=[0]*3, time_from_start=rospy.Duration(12.0))]
+    client.send_goal(p)
+    try:
+        client.wait_for_result()
+    except KeyboardInterrupt:
+        client.cancel_goal()
+        raise
+
+
+
+
+def main():
+    global client
+    try:
+        rospy.init_node("pick_coke_hand", anonymous=True, disable_signals=True)
+        client = actionlib.SimpleActionClient('hand_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
+        print "Waiting for barrett_hand server..."
+        client.wait_for_server()
+        print "Connected to barrett_hand server"
+        move()
+    except KeyboardInterrupt:
+        rospy.signal_shutdown("KeyboardInterrupt")
+        raise
+
+if __name__ == '__main__': main()
+

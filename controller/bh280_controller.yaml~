@@ -9,6 +9,15 @@ hand_controller:
      - bh_j21_joint
      - bh_j22_joint
      - bh_j23_joint
+  gains:
+      bh_j32_joint: {p: 0, i: 0.0, d: 0, i_clamp: 100.0}
+      bh_j33_joint: {p: 0, i: 0.0, d: 0, i_clamp: 100.0}
+      bh_j11_joint: {p: 0, i: 0.0, d: 0, i_clamp: 100.0}
+      bh_j12_joint: {p: 0, i: 0.0, d: 0, i_clamp: 100.0}
+      bh_j13_joint: {p: 0, i: 0.0, d: 0, i_clamp: 100.0}
+      bh_j21_joint: {p: 0, i: 0.0, d: 0, i_clamp: 100.0}
+      bh_j22_joint: {p: 0, i: 0.0, d: 0, i_clamp: 100.0}
+      bh_j23_joint: {p: 0, i: 0.0, d: 0, i_clamp: 100.0}
   constraints:
       goal_time: 0.6
       stopped_velocity_tolerance: 0.05
