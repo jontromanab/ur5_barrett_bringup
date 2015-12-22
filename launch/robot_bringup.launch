@@ -31,7 +31,13 @@
 		bh_j22_position_controller 
 		bh_j32_position_controller"/> 
   
-  <include file="$(find bhand_gazebo)/launch/bhand_controller_gazebo.launch"/>
+  
+  <!--The controllers for barrett hand from bhand_gazebo package -->
+  <!-- include file="$(find bhand_gazebo)/launch/bhand_controller_gazebo.launch"/-->
+  
+  
+  <!-- The node contains the controller and the joint_states of the barrett hand only in /bh_joint_states topic -->
+  <node name="bhand_node" pkg="bhand_gazebo" type="joint_states.py" />
   
 
   <!-- Stow the arm -->
