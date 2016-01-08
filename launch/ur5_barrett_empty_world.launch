@@ -12,9 +12,11 @@
   </include>
 
     <!-- push robot_description to factory and spawn robot in gazebo -->
-  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot  -z 0.375 -Y 3.14" respawn="false" output="screen" />
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot -z 0.375" respawn="false" output="screen" />
 
-  <include file="$(find ur5_barrett_bringup)/launch/robot_bringup.launch"/>
+  <include file="$(find ur5_barrett_bringup)/launch/robot_bringup.launch">
+   <arg name="limited" value="$(arg limited)"/>
+  </include>
 
   
 </launch>
