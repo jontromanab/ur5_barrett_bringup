@@ -25,21 +25,22 @@
   <!-- load the controllers of the hand-->
   <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
     output="screen" ns="/" args="
+		bh_j11_position_controller
 		bh_j12_position_controller 
 		bh_j22_position_controller 
 		bh_j32_position_controller"/> 
-  
-  <include file="$(find bhand_gazebo)/launch/bhand_spread_fixed_controller_gazebo.launch"/>
-  <!--include file="$(find bhand_gazebo)/launch/bhand_controller_gazebo.launch"/-->
-  <!--node name="bhand_node" pkg="bhand_gazebo" type="joint_states.py" /-->
 
+
+<!-- Controller for bhand_node -->  
+  <include file="$(find bhand_gazebo)/launch/bhand_controller_gazebo.launch"/>
+  
+<!--Follow action controller for barrett hand -->
   <include file="$(find barrett_hand_follow)/launch/barrett_hand_follow_controller.launch"/>
-  <!-- Stow the arm -->
-  <!--node name="stow_ur5_new" pkg="ur5_barrett_bringup" type="stow_ur5_new" /-->
-
-  <!--rosparam file="$(find ur5_barrett_bringup)/controller/bh282_follow_controller.yaml" command="load"/>
-  <node name="hand_controller_spawner" pkg="controller_manager" type="spawner" args="hand_controller" /-->
   
 
+  
+  
+<!--Camera Pipeline -->
+  <include file="$(find ur5_barrett_bringup)/launch/camera.launch.xml" />
 
 </launch>
